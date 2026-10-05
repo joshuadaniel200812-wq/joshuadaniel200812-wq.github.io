@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joshua Daniel — Part Time Game Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #10121a;
+    --panel: #171b29;
+    --panel-line: #2a2f42;
+    --text: #e7e7ed;
+    --muted: #9098ac;
+    --gold: #f2b705;
+    --coral: #ff6b57;
+    --teal: #3ddc97;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, .brand {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* nav */
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(16, 18, 26, 0.9);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--panel-line);
+    z-index: 10;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .brand { font-size: 1.05rem; color: var(--text); text-decoration: none; }
+  .navlinks { display: flex; gap: 24px; }
+  .navlinks a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.92rem;
+    transition: color 0.15s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible { color: var(--text); }
+
+  /* hero */
+  .hero { padding: 64px 0 40px; }
+  .hero h1 {
+    font-size: clamp(2.1rem, 6vw, 2.8rem);
+    margin: 0 0 6px;
+    color: var(--text);
+  }
+  .hero .role {
+    font-size: 1.05rem;
+    color: var(--gold);
+    margin: 0 0 20px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 500;
+  }
+  .hero p.blurb {
+    color: var(--muted);
+    max-width: 52ch;
+    margin: 0 0 32px;
+  }
+
+  /* HUD stat bar, echoes the leaderstats UI from Joshua's own project */
+  .hud {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .hud-stat {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    padding: 14px 20px;
+    min-width: 130px;
+  }
+  .hud-stat .label {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .hud-stat .value {
+    display: block;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .hud-stat.coins .value { color: var(--gold); }
+  .hud-stat.wins .value { color: var(--teal); }
+  .hud-stat.stage .value { color: var(--coral); }
+
+  /* sections */
+  section { padding: 48px 0; border-top: 1px solid var(--panel-line); }
+  section h2 {
+    font-size: 1.5rem;
+    margin: 0 0 24px;
+  }
+
+  /* project card */
+  .project {
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px);
+    padding: 28px 28px 24px;
+  }
+  .project h3 {
+    margin: 0 0 6px;
+    font-size: 1.25rem;
+  }
+  .project .tagline {
+    color: var(--gold);
+    font-size: 0.9rem;
+    margin: 0 0 14px;
+  }
+  .project p.desc {
+    color: var(--muted);
+    margin: 0 0 18px;
+    max-width: 58ch;
+  }
+  .feature-list {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 20px;
+  }
+  .feature-list li {
+    font-size: 0.9rem;
+    color: var(--text);
+    padding-left: 14px;
+    position: relative;
+  }
+  .feature-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    background: var(--teal);
+  }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-size: 0.78rem;
+    color: var(--muted);
+    border: 1px solid var(--panel-line);
+    padding: 4px 10px;
+  }
+  .status-note {
+    margin-top: 18px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+  }
+  .skill {
+    border: 1px solid var(--panel-line);
+    padding: 14px 16px;
+  }
+  .skill .name {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 0.98rem;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .skill .note {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  /* contact */
+  .contact-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px 22px;
+    border: 1px solid var(--panel-line);
+    color: var(--text);
+    font-size: 0.92rem;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .btn:hover, .btn:focus-visible { border-color: var(--gold); color: var(--gold); }
+  .btn.primary { background: var(--gold); color: #10121a; border-color: var(--gold); }
+  .btn.primary:hover, .btn.primary:focus-visible { background: #ffcb2e; color: #10121a; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  footer {
+    padding: 28px 0 40px;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 560px) {
+    .feature-list { grid-template-columns: 1fr; }
+    nav { flex-direction: column; gap: 10px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="brand" href="#top">Joshua Daniel</a>
+    <div class="navlinks">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" id="top">
+    <h1>Joshua Daniel</h1>
+    <p class="role">Part Time Game Developer</p>
+    <p class="blurb">I build small, self-contained game systems — the kind of scripts that quietly keep a game running: saved progress, checkpoints, scoring, hazards. Currently working in Roblox Studio with Lua.</p>
+
+    <div class="hud">
+      <div class="hud-stat coins">
+        <span class="label">Coins</span>
+        <span class="value" data-target="25">0</span>
+      </div>
+      <div class="hud-stat wins">
+        <span class="label">Wins</span>
+        <span class="value" data-target="1">0</span>
+      </div>
+      <div class="hud-stat stage">
+        <span class="label">Stage</span>
+        <span class="value" data-target="7">0</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>Luva</h3>
+      <p class="tagline">Roblox obby with persistent progress</p>
+      <p class="desc">An obstacle-course (obby) game where a player's coins, wins, and furthest checkpoint are saved server-side, so progress survives between sessions. Built the full loop of systems that make an obby feel alive: things that help you, things that hurt you, and a way to keep score of both.</p>
+      <ul class="feature-list">
+        <li>DataStore-backed save/load per player, with retry-safe writes on leave and server shutdown</li>
+        <li>Checkpoint system that respawns players at their furthest point reached</li>
+        <li>Collectible coins with pickup cooldown and respawn timing</li>
+        <li>Kill bricks with per-player debounce to prevent repeat damage</li>
+        <li>Speed pads that temporarily boost movement, then decay back to normal</li>
+        <li>Finish line that awards coins and wins, then resets the run</li>
+        <li>Live HUD reading each player's leaderstats in real time</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Lua</span>
+        <span class="tag">Roblox Studio</span>
+        <span class="tag">DataStoreService</span>
+      </div>
+      <p class="status-note">In development — public build link coming soon.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill"><span class="name">Lua</span><span class="note">primary scripting language</span></div>
+      <div class="skill"><span class="name">Roblox Studio</span><span class="note">level & systems building</span></div>
+      <div class="skill"><span class="name">Game Systems</span><span class="note">checkpoints, scoring, hazards</span></div>
+      <div class="skill"><span class="name">Data Persistence</span><span class="note">DataStoreService, safe saves</span></div>
+      <div class="skill"><span class="name">Event-driven Scripting</span><span class="note">Touched, Changed, debounce logic</span></div>
+      <div class="skill"><span class="name">Git & GitHub</span><span class="note">version control</span></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-buttons">
+      <a class="btn primary" href="mailto:joshuadaniel200812@gmail.com">Email me</a>
+      <a class="btn" href="https://github.com/joshuadaniel200812-wq" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/joshua-daniel-b17b4641a/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; <span id="year"></span> Joshua Daniel
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // one orchestrated count-up moment on load, mirroring the leaderstats HUD
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.hud-stat .value').forEach((el) => {
+    const target = parseInt(el.dataset.target, 10) || 0;
+    if (prefersReduced) {
+      el.textContent = target;
+      return;
+    }
+    let current = 0;
+    const duration = 900;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      current = Math.round(progress * target);
+      el.textContent = current;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+</script>
+
+</body>
+</html>
